@@ -22,11 +22,13 @@
 <table>
 <td width=16% valign=top>
 {% if account %}
+{% if account.active %}
 Current Points {{ account.points }} 
+{% endif %}
 {% else %}
 {% if user %}
 <form action="/account" method="post">
-<div>nickname <textarea name="nickname" rows="1" cols="10"></textarea></div>
+<div>nickname <textarea name="nickname" rows="1" cols="20"></textarea></div>
 <div><input type="submit" value="create flimflam account"></div>
 </form>
 {% else %} 

@@ -35,17 +35,16 @@ def main():
 	user = users.get_current_user()
 	account = mewantee.Account.gql("WHERE owner=:1 ORDER BY date DESC", user).get();
 
-	if account.active:
+	if account and account.active:
 		application = webapp.WSGIApplication([ 
 			('/', 			MainPage),	
-			#('/admin/users', admin.AdminUsersPage),
+			('/account', 			mewantee.ManageAccount),
 			('/request/(.*)', 		mewantee.FullRequest),
 			('/addrequest', 		mewantee.AddRequest),
 			('/addbounty/(.*)', 	mewantee.AddBounty),
 			('/bounties', 			mewantee.AddBounty),
 			('/payment/(.*)/(.*)', 	mewantee.AddPayment),
 			('/payments', 			mewantee.AddPayment),
-			('/account', 			mewantee.ManageAccount),
 			('/comments', 			mewantee.AddComment),
 			('/comment/(.*)',		mewantee.AddComment),
 			],
@@ -54,6 +53,7 @@ def main():
 	else:
 		application = webapp.WSGIApplication([ 
 			('/', 			MainPage),	
+			('/account', 			mewantee.ManageAccount),
 			],
 			debug=True)
 
