@@ -3,9 +3,65 @@
 <title>mewantee!</title>
 
 <center><b>ME WANTEE!</b></center>
-<br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br>
-<br><br><br><br><br><br><br>
+
+<table>
+
+<td width=12% >
+</td>
+
+<td>
+
+<p align=right>
+{% if account %}
+<b>{{ account.nickname }} |</b>
+{% endif %}
+<a href="{{ url }}">{{ url_linktext }}</a>
+</p>
+<hr>
+
+<table>
+<td width=16% valign=top>
+{% if account %}
+Current Points {{ account.points }} 
+{% else %}
+{% if user %}
+<form action="/account" method="post">
+<div>nickname <textarea name="nickname" rows="1" cols="10"></textarea></div>
+<div><input type="submit" value="create flimflam account"></div>
+</form>
+{% else %} 
+<p>Login and create an account</p>
+{% endif %}
+{% endif %}
+</td>
+
+<td width=3%></td
+
+
+<td width=40%>
+<div id ="uniqeblock">
+	{% block uniqueblock %}{% endblock %}
+<br><br>{{ message  }}
+</div>
+</td>
+
+<td width=16%></td>
+</table>
+
+<hr>
+
+</td>
+
+<td width=12%></td>
+
+</table>
+<p align=center >all rights reserved 2008 binarymillenium</p>
+
+
+
+
+
+
 
 
 <!-- google analytics -->
@@ -36,3 +92,4 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 <body>
 </html>
+
