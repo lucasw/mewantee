@@ -1,10 +1,10 @@
 
 {% extends "base.html" %}
 
-{ block uniqueblock %}
+{% block uniqueblock %}
 <b>Accounts</b><br><br>
-{% for account in accounts %}
-<b> {{ account.owner }} - {{ account.nickname }}  - {{ account.points }} - {{ account.date }} - {{ account.active }}
+{% for anaccount in accountlist %}
+<b> {{ anaccount.owner }} - {{ anaccount.nickname }}  - {{ anaccount.points }} - {{ anaccount.date }} - {{ anaccount.active }}
 </b><br><br>
 {% endfor %}
 

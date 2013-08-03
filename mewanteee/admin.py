@@ -14,7 +14,7 @@ class AdminUsersPage(webapp.RequestHandler):
 
 		user = users.get_current_user()
 
-		accountlist = Account.gql("ORDER BY date DESC")
+		accountlist = mewantee.Account.gql("ORDER BY date DESC")
 
 		(account, url_linktext, url) = mewantee.FlimUtility().loginoutUrls(self,user)
 
@@ -33,7 +33,7 @@ class AdminUsersPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, template_values))
 
 
-def main():
+def admin():
 	application = webapp.WSGIApplication([
 	('/admin/users', AdminUsersPage),
 	],
@@ -41,5 +41,5 @@ def main():
 	wsgiref.handlers.CGIHandler().run(application)
 
 if __name__ == "__main__":
-	main()
+	admin()
 

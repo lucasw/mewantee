@@ -1,6 +1,7 @@
 import cgi
 import wsgiref.handlers
 import os
+#import admin
 import mewantee
 
 from google.appengine.api import users
@@ -20,7 +21,7 @@ class MainPage(webapp.RequestHandler):
 		template_values = {
 			'user': user,
 #			'message': message,
-		#	'account': account,
+			'account': account,
 #			'requests': requests,
 			'url': url,
 			'url_linktext': url_linktext,
@@ -35,6 +36,7 @@ def main():
 
 	application = webapp.WSGIApplication([ 
 			('/', 			MainPage),	
+			#('/admin/users', admin.AdminUsersPage),
 			('/request/(.*)', 		mewantee.FullRequest),
 			('/addrequest', 		mewantee.AddRequest),
 			('/addbounty/(.*)', 	mewantee.AddBounty),
