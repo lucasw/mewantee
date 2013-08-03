@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+
+{ block uniqueblock %}
+<b>Accounts</b><br><br>
+{% for account in accounts %}
+<b> {{ account.owner }} - {{ account.nickname }}  - {{ account.points }} - {{ account.date }} - {{ account.active }}
+</b><br><br>
+{% endfor %}
+
+
+{% endblock %}
+
+

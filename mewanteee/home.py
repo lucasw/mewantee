@@ -34,8 +34,17 @@ def main():
 
 
 	application = webapp.WSGIApplication([ 
-		('/', MainPage),	
-		],
+			('/', 			MainPage),	
+			('/request/(.*)', 		mewantee.FullRequest),
+			('/addrequest', 		mewantee.AddRequest),
+			('/addbounty/(.*)', 	mewantee.AddBounty),
+			('/bounties', 			mewantee.AddBounty),
+			('/payment/(.*)/(.*)', 	mewantee.AddPayment),
+			('/payments', 			mewantee.AddPayment),
+			('/account', 			mewantee.ManageAccount),
+			('/comments', 			mewantee.AddComment),
+			('/comment/(.*)',		mewantee.AddComment),
+			],
 		debug=True)
 	wsgiref.handlers.CGIHandler().run(application)
 
