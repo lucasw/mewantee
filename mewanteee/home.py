@@ -32,9 +32,11 @@ class MainPage(webapp.RequestHandler):
 
 def main():
 
+	user = users.get_current_user()
+	account = mewantee.Account.gql("WHERE owner=:1 ORDER BY date DESC", user).get();
 
-
-	application = webapp.WSGIApplication([ 
+	if account.active:
+		application = webapp.WSGIApplication([ 
 			('/', 			MainPage),	
 			#('/admin/users', admin.AdminUsersPage),
 			('/request/(.*)', 		mewantee.FullRequest),
@@ -48,6 +50,15 @@ def main():
 			('/comment/(.*)',		mewantee.AddComment),
 			],
 		debug=True)
+
+	else:
+		application = webapp.WSGIApplication([ 
+			('/', 			MainPage),	
+			],
+			debug=True)
+
+
+
 	wsgiref.handlers.CGIHandler().run(application)
 
 if __name__ == "__main__":

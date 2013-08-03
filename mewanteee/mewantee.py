@@ -304,6 +304,7 @@ class Account(db.Model):
 	points = db.IntegerProperty()
 	date = db.DateTimeProperty(auto_now_add=True)
 	active = db.BooleanProperty()
+	admin = db.BooleanProperty()
 	# TBD add account id?  or make the nickname be in the url?
 
 class ManageAccount(webapp.RequestHandler):
@@ -322,8 +323,13 @@ class ManageAccount(webapp.RequestHandler):
 		account.points = 100
 		# the admin must activate the account
 		account.active = False
-		account.put()
+		account.admin  = False
 
+		if users.is_current_user_admin():
+			account.admin = True;
+
+		account.put()
+		
 		self.redirect('/')
 
 class AddRequest(webapp.RequestHandler):

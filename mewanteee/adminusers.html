@@ -4,8 +4,8 @@
 {% block uniqueblock %}
 <b>Accounts</b><br><br>
 {% for anaccount in accountlist %}
-<b> {{ anaccount.owner }} - {{ anaccount.nickname }}  - {{ anaccount.points }} - {{ anaccount.date }} - {{ anaccount.active }}
-</b><br><br>
+{{ anaccount.owner }} - {{ anaccount.nickname }}  - {{ anaccount.points }} - {{ anaccount.date }} - <a href="/admin/users/activate/{{anaccount.nickname}}">{% if anaccount.active %} Deactivate {% else %} Activate {% endif %}</a>  {% if anaccount.admin %}ADMIN{% endif %}
+<br><br>
 {% endfor %}
 
 

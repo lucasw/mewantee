@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block uniqueblock %}
+
+{% if request %}
+{% if request.author %}
+<b> {{ request.author.nickname }}</b>:
+{% else %}
+anonymous:
+{% endif %}
+<b> {{ request.title|escape }} - {{ request.bounty|escape }}</b>  -   {{ request.date|date:"F j"}}
+<p>{{ request.content|escape }}</p>
+
+<hr>
+
+{% if account %}
+<form action="/addbounty/{{ request.id }}" method="post">
+<div><textarea name="bounty" rows="1" cols="4">10</textarea><input type="submit" value="Add Bounty"></div>
+</form>
+<hr>
+{% endif %}
+<hr>
+
+{% for comment in comments %}
+<b> {{ comment.id }} - {{ comment.content }}  - {{ comment.author }} </b> {% ifequal comment.author user %} {% else %}{% if account %} - <form action="/payment/{{ request.id }}/{{ comment.id }}" method="post"><textarea name="paybounty" rows="1" cols="5">2</textarea><input type="submit" value="Pay">
+</form>{% endif %}
+<br>
+{% endifequal %}
+{% endfor %}
+
+
+{% if account %}
+<form action="/comment/{{ request.id }}" method="post">
+<div><textarea name="comment" rows="2" cols="60"></textarea></div>
+<div><input type="submit" value="Add Response"></div>
+</form>
+{% endif %}
+<hr>
+
+{% endif %}
+
+{% endblock %}

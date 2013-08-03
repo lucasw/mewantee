@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block uniqueblock %}
+
+{% for bounty in bounties %}
+{% ifchanged %} {{ bounty.date|date:"F j"}}<br><hr> {% endifchanged %}
+<b> {{ bounty.id }} </b> - {{ bounty.user }} added {{ bounty.bounty }} points to 
+<a href="request/{{ bounty.request_id }}">request {{ bounty.request_id }}</a><br>
+{% endfor %}
+
+{% endblock %}

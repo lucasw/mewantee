@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block uniqueblock %}
+<b>Comments</b><br><br>
+{% for comment in comments %}
+<b> <a href="request/{{ comment.request_id }}">{{ comment.request_id }}</a> - {{ comment.id }} - {{ comment.content }}  - {{ comment.author }} </b><br><br>
+{% endfor %}
+
+
+{% endblock %}

@@ -1,4 +1,33 @@
 {% extends "base.html" %}
 
-<b>testtest</b>
+{% block uniqueblock %}
+
+{% for request in requests %}
+{% if request.author %}
+{% ifchanged %} {{ request.date|date:"F j"}}<br><hr> {% endifchanged %}
+<b>{{ request.id }} - {{ request.author_nickname }}</b>:
+{% else %}
+anonymous:
+{% endif %}
+<b> <a href="request/{{ request.id }}">{{ request.title|escape }}</a> - {{ request.bounty|escape }}</b>
+<br>
+{% endfor %}
+
+
+{% if account %} 
+<br>
+<hr>
+<br>
+<form action="/addrequest" method="post">
+<div><textarea name="title"   rows="1" cols="60"></textarea></div>
+<div><textarea name="content" rows="3" cols="60"></textarea></div>
+<div><textarea name="bounty"  rows="1" cols="10"></textarea></div>
+<div><input type="submit" value="Post New Request"></div>
+</form>
+{% endif %} 
+
+<br>
+
+
+{% endblock %}
 

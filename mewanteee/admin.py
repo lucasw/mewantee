@@ -9,6 +9,22 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 
 
+class ActivateUsersPage(webapp.RequestHandler):
+	def get(self, nickname):
+
+		account = mewantee.Account.gql("WHERE nickname=:1 ORDER BY date DESC", nickname).get();
+		account.active = not account.active
+		account.put()
+
+	#	if account.active:
+	#		self.response.out.write("activated")
+	#	else:
+	#		self.response.out.write("deactivated")
+
+	#	self.response.out.write("<a href=\"/admin/users/\">return</a>")
+
+		self.redirect('/admin/users')
+
 class AdminUsersPage(webapp.RequestHandler):
 	def get(self):
 
@@ -23,7 +39,7 @@ class AdminUsersPage(webapp.RequestHandler):
 			'user': user,
 			'accountlist': accountlist,
 			#           'message': message,
-			#   'account': account,
+			'account': account,
 			#           'requests': requests,
 			'url': url,
 			'url_linktext': url_linktext,
@@ -36,6 +52,7 @@ class AdminUsersPage(webapp.RequestHandler):
 def admin():
 	application = webapp.WSGIApplication([
 	('/admin/users', AdminUsersPage),
+	('/admin/users/activate/(.*)', ActivateUsersPage),
 	],
 	debug=True)
 	wsgiref.handlers.CGIHandler().run(application)
